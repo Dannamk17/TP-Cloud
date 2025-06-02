@@ -8,11 +8,11 @@ resource "aws_s3_bucket_website_configuration" "this" {
   bucket = aws_s3_bucket.this.id
 
   index_document {
-    suffix = "index.html"
+    suffix = var.index_document
   }
 
   error_document {
-    key = "error.html"
+    key = var.error_document
   }
 }
 
@@ -25,6 +25,14 @@ resource "aws_s3_object" "files" {
   source = each.value
   #acl    = "public-read"  # Asegura que cada objeto sea público
   content_type = lookup(var.content_types, each.key, null)
+}
+
+resource "aws_s3_object" "config_js" {
+  bucket       = aws_s3_bucket.this.id
+  key          = "config.js"
+  source       = "${path.module}/../frontend/config.js"
+  content_type = "application/javascript"
+  acl          = "public-read"
 }
 
 # Opcional: outputs para obtener el website endpoint

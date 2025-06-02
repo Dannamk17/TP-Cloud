@@ -6,7 +6,7 @@ provider "aws" {
 # Módulo para el bucket S3 (ya creado previamente)
 module "frontend_bucket" {
   source      = "./modules/s3_bucket"
-  bucket_name = "bucket-recetify-tp"
+  bucket_name = "bucket-recetify-tp3"
   acl         = "public-read"
   files = {
     "index.html"    = "${path.module}/frontend/index.html"
@@ -14,6 +14,7 @@ module "frontend_bucket" {
     "receta.html"   = "${path.module}/frontend/receta.html"
     "registro.html" = "${path.module}/frontend/registro.html"
     "recetas.png"     = "${path.module}/frontend/recetas.png"
+    "config.js"     = "${path.module}/frontend/config.js"
   }
   content_types = {
     "index.html"    = "text/html"
@@ -21,6 +22,7 @@ module "frontend_bucket" {
     "receta.html"   = "text/html"
     "registro.html" = "text/html"
     "recetas.png"     = "recetas/png"
+    "config.js"     = "application/javascript"
   }
 }
 
@@ -39,13 +41,16 @@ module "dynamodb_recetas" {
   #}
 }
 
+data "aws_caller_identity" "current" {}
+
 # Módulo para las Lambdas
 module "lambdas" {
   source = "./modules/lambda"
 
   # ARN real del LabRole
-  lambda_role_arn = "arn:aws:iam::061151021706:role/LabRole"  # Cambia esto por el ARN real de tu LabRole
-
+  
+  
+lambda_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/LabRole"
   lambdas = {
     "registroUsuario" = {
       source_zip = "lambdas/registroUsuario/lambda_function.zip"
@@ -83,4 +88,13 @@ module "api_gateway" {
 output "api_invoke_url" {
   # Cambiar a API HTTP invoke_url
   value = module.api_gateway.invoke_url
+}
+
+resource "local_file" "api_config" {
+  content = <<-EOT
+    const apiConfig = {
+      apiBaseUrl: "${module.api_gateway.invoke_url}"
+    };
+  EOT
+  filename = "${path.module}/build/config.js"
 }

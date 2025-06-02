@@ -25,5 +25,5 @@ resource "aws_lambda_function" "this" {
   }
 
   # Timeout de ejecución en segundos
-  timeout = 10
+  # timeout = 10
 }

@@ -639,6 +639,7 @@
     <p>© 2025 Recetas en Casa - Todos los derechos reservados</p>
   </footer>
 
+  <script src="config.js"></script>
   <script>
     // Verificar si hay usuario logueado
     /*document.addEventListener('DOMContentLoaded', function() {
@@ -648,14 +649,14 @@
         window.location.href = 'index.html';
       }
     });*/ 
-
+    src="config.js"
     // Configuración de tipos de búsqueda
     const searchTypeRadios = document.querySelectorAll('input[name="search-type"]');
     const searchNombreContainer = document.getElementById('search-nombre-container');
     const searchCategoriaContainer = document.getElementById('search-categoria-container');
     const searchIngredientesContainer = document.getElementById('search-ingredientes-container');
-    const apiBaseUrl = "https://wt36953zq0.execute-api.us-east-1.amazonaws.com/dev";
-    
+    const apiBaseUrl = apiConfig.apiBaseUrl;    
+
     // Array para almacenar ingredientes de búsqueda
     let searchIngredients = [];
     
