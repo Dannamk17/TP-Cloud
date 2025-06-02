@@ -1,0 +1,161 @@
+# ===========================================
+# TERRAFORM FILES
+# ===========================================
+
+# Terraform state files (SENSITIVE - contain real infrastructure data)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Terraform variable files with sensitive data
+*.tfvars
+*.tfvars.json
+terraform.tfvars
+terraform.tfvars.json
+
+# Terraform directories
+.terraform/
+.terraform.lock.hcl
+
+# Terraform plan files
+*.tfplan
+*.tfplan.*
+
+# ===========================================
+# AWS & CLOUD FILES
+# ===========================================
+
+# AWS credentials
+.aws/
+*.pem
+*.key
+
+# Cloud formation templates (generated)
+*.template
+
+# ===========================================
+# LAMBDA & BUILD ARTIFACTS (HEAVY FILES)
+# ===========================================
+
+# Lambda deployment packages (ZIP files are heavy)
+*.zip
+**/*.zip
+lambdas/**/*.zip
+
+# Node.js dependencies (very heavy)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python dependencies
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Python virtual environments
+.env
+.venv
+
+# ===========================================
+# BUILD & DIST FILES (HEAVY)
+# ===========================================
+
+# Build directories
+build/
+dist/
+target/
+out/
+
+# Compiled files
+*.class
+*.jar
+*.war
+*.ear
+
+# ===========================================
+# LOGS & TEMPORARY FILES
+# ===========================================
+
+# Log files
+*.log
+logs/
+log/
+
+# Temporary files
+*.tmp
+*.temp
+*~
+.DS_Store
+Thumbs.db
+
+# ===========================================
+# IDE & EDITOR FILES
+# ===========================================
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-*
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ===========================================
+# OS FILES
+# ===========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ===========================================
+# SECURITY & SENSITIVE FILES
+# ===========================================
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# API keys and secrets
+secrets/
+*.secret
+config/secrets.json
+
+# SSL certificates
+*.crt
+*.pem
+*.key
+*.p12
+*.pfx
